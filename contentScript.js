@@ -5,12 +5,12 @@ console.log("contentScript");
   let currentVideoId = "";
   let currentVideoBookmarks = [];
 
-  chrome.runtime.onMessage.addListener((obj, sender, response) => {
-    const { type, value, videoId } = obj;
+  chrome.runtime.onMessage.addListener((msg, sender, response) => {
+    const { type, value, videoId } = msg;
 
     if (type === "NEW") {
       currentVideoId = videoId;
-      console.log("i am the object:", obj);
+      console.log("i am the object:", msg);
       console.log("i am the value:", value);
       newVideoLoaded();
     }
@@ -45,27 +45,27 @@ console.log("contentScript");
     }
   };
 
-  //   const addNewBookmarkEventHandler = async () => {
-  //     const currentTime = youtubePlayer.currentTime;
-  //     const newBookmark = {
-  //       time: currentTime,
-  //       desc: "Bookmark at " + getTime(currentTime),
-  //     };
-  //     console.log(newBookmark);
-  //     currentVideoBookmarks = await fetchBookmarks();
+  const addNewBookmarkEventHandler = async () => {
+    const currentTime = youtubePlayer.currentTime;
+    const newBookmark = {
+      time: currentTime,
+      desc: "Bookmark at " + getTime(currentTime),
+    };
+    console.log(newBookmark);
+    currentVideoBookmarks = await fetchBookmarks();
 
-  //     chrome.storage.sync.set({
-  //       [currentVideoId]: JSON.stringify(
-  //         [...currentVideoBookmarks, newBookmark].sort((a, b) => a.time - b.time)
-  //       ),
-  //     });
-  //   };
-  //   newVideoLoaded();
+    chrome.storage.sync.set({
+      [currentVideoId]: JSON.stringify(
+        [...currentVideoBookmarks, newBookmark].sort((a, b) => a.time - b.time)
+      ),
+    });
+  };
+  newVideoLoaded();
 })();
 
-// const getTime = (t) => {
-//   var date = new Date(0);
-//   date.setSeconds(1);
+const getTime = (t) => {
+  var date = new Date(0);
+  date.setSeconds(1);
 
-//   return date.toISOString().substr(11, 8);
-// };
+  return date.toISOString().substr(11, 8);
+};

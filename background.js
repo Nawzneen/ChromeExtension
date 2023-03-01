@@ -1,13 +1,11 @@
 chrome.tabs.onUpdated.addListener((tabId, tab) => {
   if (tab.url && tab.url.includes("youtube.com/watch")) {
     const queryParameters = tab.url.split("?")[1];
-    // const emptyyObject = {};
+
     const urlParameters = new URLSearchParams(queryParameters);
 
     console.log("tab is", tab);
     console.log("urlParameters is", urlParameters.get("v"));
-    // console.log("queryParameters is", queryParameters);
-    // console.log("emptyyobject is", emptyyObject);
 
     chrome.tabs.sendMessage(tabId, {
       type: "NEW",
