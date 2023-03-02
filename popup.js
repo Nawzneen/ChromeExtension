@@ -1,5 +1,6 @@
 import { getActiveTabURL } from "./utils.js";
 console.log("pop up is working");
+//Pushing
 // adding a new bookmark row to the popup
 const addNewBookmark = (bookmarksElement, bookmark) => {
   console.log("add new bookmark is working");
