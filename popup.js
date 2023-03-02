@@ -6,6 +6,7 @@ const addNewBookmark = (bookmarksElement, bookmark) => {
   console.log("add new bookmark is working");
   const bookmarkTitleElement = document.createElement("div");
   const newBookmarkElement = document.createElement("div");
+  const controlsElement = document.createElement("div");
   bookmarkTitleElement.textContent = bookmark.desc;
   bookmarkTitleElement.className = "bookmark-title";
   newBookmarkElement.id = "bookmark-" + bookmark.time;
@@ -17,6 +18,7 @@ const addNewBookmark = (bookmarksElement, bookmark) => {
 
 const viewBookmarks = (currentBookmarks = []) => {
   console.log("view bookmarks is working");
+  console.log("currentbookmarks are", currentBookmarks);
   const bookmarksElement = document.getElementById("bookmarks");
   bookmarksElement.innerHTML = "";
   if (currentBookmarks.length > 0) {
@@ -28,6 +30,7 @@ const viewBookmarks = (currentBookmarks = []) => {
   } else {
     bookmarksElement.innerHTML = `<i class="row"> No bookmarks to show</i>`;
   }
+  return;
 };
 
 const onPlay = (e) => {};

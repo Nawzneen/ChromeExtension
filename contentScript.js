@@ -15,6 +15,7 @@ console.log("contentScript");
       newVideoLoaded();
     }
   });
+
   const fetchBookmarks = () => {
     return new Promise((resolve) => {
       chrome.storage.sync.get([currentVideoId], (obj) => {
@@ -65,7 +66,11 @@ console.log("contentScript");
 
 const getTime = (t) => {
   var date = new Date(0);
-  date.setSeconds(1);
+  console.log("date before set second is", date);
+
+  date.setSeconds(t);
+  console.log("date after set second is", date.setSeconds(t));
+  console.log("tostringdate", date.toISOString().substr(11, 8));
 
   return date.toISOString().substr(11, 8);
 };
